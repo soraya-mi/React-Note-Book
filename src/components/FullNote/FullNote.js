@@ -13,10 +13,6 @@ const FullNote=()=>{
             <hr color="primary"/>
             <p>{note.content.length===0?"...":note.content}</p>
             {/* <p>{notes.length===0?"empty":notes[notes.length-1].content}</p> */}
-        <Box>
-        <Button size="small" color="default">Edit</Button>
-        <Button size="small" color="secondary">Delete</Button>
-        </Box>
         </Box>
     )
 }

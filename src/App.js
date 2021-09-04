@@ -14,19 +14,21 @@ function App() {
          </Toolbar>
       </AppBar>
       <NotesProvider>
+      <FullNoteProvider>
       <Grid container direction="row" justifyContent="center">
         <Grid container item xs={3} spacing={3} >
           <NewNote/>
         </Grid>
         <Grid container item xs={3} spacing={3} >
-          <FullNoteProvider>
+         
           <FullNote/>
-          </FullNoteProvider>
+          
         </Grid>
         <Grid container item xs={6} spacing={3}>
           <NoteList/>
         </Grid>        
       </Grid>
+      </FullNoteProvider>
       </NotesProvider>
     </div>
   );

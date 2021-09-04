@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles ,Button,Typography} from "@material-ui/core";
+import useFullNoteActions from "../../hooks/useFullNoteActions"
 const useStyles = makeStyles(theme => ({
     root: {
         background: 'linear-gradient(45deg, rgba(254,107,139,0.8) 30%, rgba(255,142,83,0.7) 90%)',
@@ -15,8 +16,13 @@ const useStyles = makeStyles(theme => ({
 
 const Note=(Props)=>{
     const classes = useStyles();
+    const setFullNote=useFullNoteActions();
+    const handleSelect=()=>{
+        const selectedNote={id: Props.id,title:Props.title,content:Props.content};
+        setFullNote(selectedNote);
+    }
     return(
-        <div className={classes.root} >
+        <div className={classes.root} onClick={handleSelect}>
         <Button size="small" color="default">Edit</Button>
         <Button size="small" color="secondary" onClick={Props.Delete}>Delete</Button>
         <Typography variant="h6">{Props.title}</Typography>
