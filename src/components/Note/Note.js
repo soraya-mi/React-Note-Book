@@ -7,17 +7,17 @@ const useStyles = makeStyles(theme => ({
         borderRadius: 3,
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .9)',
         color: 'white',
-        width: 'auto',
-        padding: '.3rem .5rem',
-        maxWidth: '50%',
+        height: 'auto',
+        padding: '0 .5rem',
+        minWidth: '5rem',
       },
   }));
-const Note=()=>{
+const Note=(Props)=>{
     const classes = useStyles();
     return(
         <div className={classes.root}>
-        <h3>title</h3>
-        <p>content content content  cntcontent content</p>
+        <h3>{Props.title}</h3>
+        <p>{Props.content}</p>
         </div>
     )
 }

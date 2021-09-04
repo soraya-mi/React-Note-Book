@@ -3,6 +3,7 @@ import {AppBar, Toolbar, Typography,Grid} from '@material-ui/core';
 import NewNote from './components/NewNote/NewNote';
 import NoteList from './components/NoteList/NoteList';
 import FullNote from './components/FullNote/FullNote';
+import NotesProvider  from './contexts/NotesProvider';
 function App() {
   return (
     <div className="App">
@@ -11,9 +12,8 @@ function App() {
              <Typography variant="h6" >Note Book App</Typography>
          </Toolbar>
       </AppBar>
-      <Grid   container
-      direction="row"
-      justifyContent="center">
+      <NotesProvider>
+      <Grid container direction="row" justifyContent="center">
         <Grid container item xs={3} spacing={3} >
           <NewNote/>
         </Grid>
@@ -22,10 +22,10 @@ function App() {
         </Grid>
         <Grid container item xs={6} spacing={3}>
           <NoteList/>
-        </Grid>
+        </Grid>        
       </Grid>
+      </NotesProvider>
     </div>
   );
 }
-
 export default App;

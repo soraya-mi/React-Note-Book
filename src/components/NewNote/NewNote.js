@@ -1,47 +1,43 @@
 import  './newNote.module.css';
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {React,useState,useEffect} from "react";
 import { TextField,Button,Box } from '@material-ui/core';
-const useStyles = makeStyles(theme => ({
-    root: {
-        background: 'linear-gradient(45deg, rgba(254,107,139,0.8) 30%, rgba(255,142,83,0.7) 90%)',
-        border: 1,
-        borderRadius: 3,
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .9)',
-        color: 'white',
-        width: 'auto',
-        padding: '.3rem .5rem',
-      },
-    content: {
-        width: "5rem;",
-    }
-  }));
+import useNotes from "../../hooks/useNotes";
+import useNotesActions from "../../hooks/useNotesAction";
 const NewNote=()=>{
-    // const classes = useStyles();
+    const [newNote,setNewNote]=useState({title:'',content:''});
+    const notes=useNotes();
+    const setNotes=useNotesActions();
+    const addTitleHandler=(e)=>{
+    let note={...newNote,title:e.target.value};
+    setNewNote(note);
+    }
+    const addContentHandler=(e)=>{
+      console.log("Dhfh")
+      let note={...newNote,content:e.target.value};
+      setNewNote(note);
+    }
+    const addNoteHandler=(e)=>{
+      console.log("addNoteHandler")
+      let allNotes=notes;
+      console.log(allNotes)
+      setNotes(prev=>[...prev, newNote]);
+    }
     return(
       <>
       <Box>
        <h3>New Note</h3>
         <Box component="div">
-         
             <div>
-                <TextField
-                id="title"
-                name="title"
-                 label="Title"/>
+                <TextField value={newNote.title} id="title" name="title" label="Title"  onChange={addTitleHandler}/>
             </div>
             <div>
-                <TextField
-                id="standard-multiline-flexible"
-                label="Content"
-                placeholder="Type something"
-                 multiline/> 
+                <TextField value={newNote.content} id="content" label="Content" placeholder="Type something" multiline onChange={addContentHandler}/> 
             </div>
             <div>
-              <Button variant="contained" color="primary" type="submit">Add</Button>  
+              <Button id="add" variant="contained" color="primary" type="submit" onClick={addNoteHandler}>Add</Button>  
             </div> 
         </Box>
-        </Box>
+      </Box>
         </>
     )
 }
