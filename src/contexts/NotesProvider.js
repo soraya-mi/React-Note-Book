@@ -1,15 +1,21 @@
-import {React,useState,createContext,useEffect} from "react";
+import {React,useState,createContext,useEffect,useMemo} from "react";
 export const NotesProviderContext=createContext();
 export const NotesProviderActionContext=createContext();
 const NotesProvider=({ children })=>{
-    const [state,setState]=useState([]);
-    useEffect(()=>{               
-     console.log("render provider");     
-     console.log(state);       
-    },[state])   
+    const [notes,setNotes]=useState([]);
+    const memoizedNotes = useMemo(() => notes, [notes]);
+    useEffect(() => {
+        const localStorageNotes = JSON.parse(localStorage.getItem('notes'));
+        if (localStorageNotes && localStorageNotes.notes) {
+          setNotes(localStorageNotes.notes);
+        }
+      }, []);  
+      useEffect(() => {
+        localStorage.setItem('notes', JSON.stringify({ notes: memoizedNotes }));
+      }, [memoizedNotes]);
     return(
-        <NotesProviderContext.Provider value={state}>
-            <NotesProviderActionContext.Provider value={setState}>
+        <NotesProviderContext.Provider value={memoizedNotes}>
+            <NotesProviderActionContext.Provider value={setNotes}>
                 {children} 
             </NotesProviderActionContext.Provider>
         </NotesProviderContext.Provider>                   

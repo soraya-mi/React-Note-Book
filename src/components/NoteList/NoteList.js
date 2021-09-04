@@ -3,17 +3,27 @@ import Note from '../Note/Note';
 import {React,useEffect} from 'react';
 import '../NoteList/noteList.css';
 import useNotes from "../../hooks/useNotes";
+import useNotesActions from "../../hooks/useNotesAction";
 const NoteList=()=>{
     console.log('in list')
     const notelist=useNotes();
+    const setNoteList=useNotesActions();
+    const handleDelete=(id)=>{
+    const newList=notelist.filter(note =>note.id!==id)
+    console.log(newList);
+    setNoteList(newList);
+
+    }
+    const notesRender = notelist.map((note)=>{return <Note key={note.id} title={note.title} content={note.content} Delete={()=>handleDelete(note.id)}/>});
     useEffect(()=>{
         console.log(("list rendered"))
     })
     return(
         <Box>
             <h3>Note List</h3>
+            <hr/>
             <ul>
-                {notelist.map((note)=>{return <Note key={note.title} title={note.title} content={note.content}/>})}
+                {notesRender}
             </ul>
         </Box> 
     )
