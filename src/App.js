@@ -4,6 +4,7 @@ import NewNote from './components/NewNote/NewNote';
 import NoteList from './components/NoteList/NoteList';
 import FullNote from './components/FullNote/FullNote';
 import NotesProvider  from './contexts/NotesProvider';
+import FullNoteProvider from './contexts/FullNoteProvider';
 function App() {
   return (
     <div className="App">
@@ -18,7 +19,9 @@ function App() {
           <NewNote/>
         </Grid>
         <Grid container item xs={3} spacing={3} >
+          <FullNoteProvider>
           <FullNote/>
+          </FullNoteProvider>
         </Grid>
         <Grid container item xs={6} spacing={3}>
           <NoteList/>
